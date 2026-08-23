@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Marquee Web App</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -10,7 +10,7 @@
 
     <!-- Control Panel -->
     <div id="controls" class="controls-panel">
-        <div class="control-group">
+        <div class="control-group text-input-group">
             <label for="textInput">Message:</label>
             <input type="text" id="textInput" value="Amber is a CHUD">
         </div>
@@ -20,21 +20,23 @@
             <input type="range" id="speedInput" min="2" max="25" value="10">
         </div>
 
-        <div class="control-group">
-            <label for="bgColor">Background:</label>
-            <input type="color" id="bgColor" value="#ffc0cb">
-        </div>
+        <div class="control-row">
+            <div class="control-group">
+                <label for="bgColor">BG:</label>
+                <input type="color" id="bgColor" value="#ffc0cb">
+            </div>
 
-        <div class="control-group">
-            <label for="textColor">Text Color:</label>
-            <input type="color" id="textColor" value="#c71585">
-        </div>
+            <div class="control-group">
+                <label for="textColor">Text:</label>
+                <input type="color" id="textColor" value="#c71585">
+            </div>
 
-        <button id="toggleControlsBtn">Hide Controls (Press 'H')</button>
-        <button id="fullscreenBtn">Fullscreen</button>
+            <button id="toggleControlsBtn">Hide Menu</button>
+            <button id="fullscreenBtn">Fullscreen</button>
+        </div>
     </div>
 
-    <!-- Hidden Bar trigger to bring controls back -->
+    <!-- Floating button to show menu -->
     <button id="showControlsBtn" class="hidden">Show Menu</button>
 
     <!-- Marquee Viewport -->

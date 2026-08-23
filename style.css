@@ -12,33 +12,39 @@
 
 body {
     background-color: var(--bg-color);
-    height: 100vh;
+    height: 100dvh; /* Dynamic viewport height for mobile browsers */
     width: 100vw;
     display: flex;
     flex-direction: column;
     overflow: hidden;
     font-family: 'Arial Black', Impact, sans-serif;
     transition: background-color 0.2s ease;
+    touch-action: manipulation;
 }
 
 /* Floating Control Toolbar */
 .controls-panel {
     position: fixed;
-    top: 15px;
+    top: 12px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(10px);
-    padding: 10px 18px;
-    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 10px 16px;
+    border-radius: 14px;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     z-index: 100;
     font-family: system-ui, -apple-system, sans-serif;
     font-size: 13px;
     font-weight: 600;
+    max-width: 95vw;
+    width: max-content;
 }
 
 .control-group {
@@ -47,42 +53,53 @@ body {
     gap: 6px;
 }
 
+.control-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
 .controls-panel input[type="text"] {
     padding: 6px 10px;
     border: 1px solid #ccc;
     border-radius: 6px;
     font-weight: bold;
+    font-size: 14px;
+    max-width: 140px;
+}
+
+.controls-panel input[type="range"] {
+    width: 80px;
+    cursor: pointer;
 }
 
 .controls-panel input[type="color"] {
     border: none;
     width: 28px;
     height: 28px;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
     background: none;
 }
 
 .controls-panel button, #showControlsBtn {
     padding: 6px 12px;
-    background: #222;
+    background: #111;
     color: #fff;
     border: none;
     border-radius: 6px;
     cursor: pointer;
     font-weight: 600;
-    transition: opacity 0.2s;
-}
-
-.controls-panel button:hover, #showControlsBtn:hover {
-    opacity: 0.85;
+    font-size: 12px;
 }
 
 #showControlsBtn {
     position: fixed;
-    top: 15px;
-    left: 15px;
+    top: 12px;
+    left: 12px;
     z-index: 100;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .hidden {
@@ -102,7 +119,7 @@ body {
 .scrolling-text {
     display: inline-block;
     color: var(--text-color);
-    font-size: 16vw;
+    font-size: clamp(3rem, 18vh, 18vw); /* Responsive size across portrait and landscape */
     font-weight: 900;
     letter-spacing: 2px;
     will-change: transform;
