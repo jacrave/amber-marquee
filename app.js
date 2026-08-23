@@ -6,23 +6,23 @@ const textColor = document.getElementById('textColor');
 const marqueeText = document.getElementById('marqueeText');
 
 const controls = document.getElementById('controls');
-const toggleControlsBtn = document.getElementById('toggleControlsBtn');
-const showControlsBtn = document.getElementById('showControlsBtn');
+const menuToggleBtn = document.getElementById('menuToggleBtn');
+const closeControlsBtn = document.getElementById('closeControlsBtn');
 const fullscreenBtn = document.getElementById('fullscreenBtn');
 
-// Update text live
+// Live Text
 textInput.addEventListener('input', (e) => {
     marqueeText.textContent = e.target.value || ' ';
 });
 
-// Update speed live
+// Live Speed
 speedInput.addEventListener('input', (e) => {
     const val = e.target.value;
     speedVal.textContent = val;
     document.documentElement.style.setProperty('--scroll-duration', `${val}s`);
 });
 
-// Update colors live
+// Live Colors
 bgColor.addEventListener('input', (e) => {
     document.documentElement.style.setProperty('--bg-color', e.target.value);
 });
@@ -31,29 +31,26 @@ textColor.addEventListener('input', (e) => {
     document.documentElement.style.setProperty('--text-color', e.target.value);
 });
 
-// Toggle controls visibility
-function toggleUI(hide) {
-    if (hide) {
-        controls.classList.add('hidden');
-        showControlsBtn.classList.remove('hidden');
-    } else {
-        controls.classList.remove('hidden');
-        showControlsBtn.classList.add('hidden');
-    }
-}
+// Drawer Open/Close
+menuToggleBtn.addEventListener('click', () => {
+    controls.classList.toggle('open');
+});
 
-toggleControlsBtn.addEventListener('click', () => toggleUI(true));
-showControlsBtn.addEventListener('click', () => toggleUI(false));
+closeControlsBtn.addEventListener('click', () => {
+    controls.classList.remove('open');
+});
 
-// Keyboard shortcut: Press 'H' to toggle toolbar
+// Keyboard shortcut (Press 'H' or 'Escape' to close)
 window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        controls.classList.remove('open');
+    }
     if (e.target.tagName !== 'INPUT' && (e.key === 'h' || e.key === 'H')) {
-        const isHidden = controls.classList.contains('hidden');
-        toggleUI(!isHidden);
+        controls.classList.toggle('open');
     }
 });
 
-// Fullscreen mode
+// Fullscreen
 fullscreenBtn.addEventListener('click', () => {
     if (!document.fullscreenElement) {
         document.documentElement.requestFullscreen().catch(() => {});
