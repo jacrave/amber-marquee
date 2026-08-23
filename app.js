@@ -9,34 +9,35 @@ const toggleBtn = document.getElementById('toggleBtn');
 const settingsCard = document.getElementById('settingsCard');
 const fullscreenBtn = document.getElementById('fullscreenBtn');
 
-// Live Text
+// Live Text Update
 textInput.addEventListener('input', (e) => {
     marqueeText.textContent = e.target.value || ' ';
 });
 
-// Live Speed
+// Live Speed Update
 speedInput.addEventListener('input', (e) => {
     const val = e.target.value;
     speedVal.textContent = val;
     document.documentElement.style.setProperty('--scroll-duration', `${val}s`);
 });
 
-// Live Colors
+// Live Background Color Update
 bgColor.addEventListener('input', (e) => {
     document.documentElement.style.setProperty('--bg-color', e.target.value);
 });
 
+// Live Text Color Update
 textColor.addEventListener('input', (e) => {
     document.documentElement.style.setProperty('--text-color', e.target.value);
 });
 
-// Settings Toggle
+// Settings Card Toggle
 toggleBtn.addEventListener('click', () => {
     settingsCard.classList.toggle('hidden');
     toggleBtn.textContent = settingsCard.classList.contains('hidden') ? '⚙️ Settings' : '✕ Close';
 });
 
-// Fullscreen
+// Fullscreen Mode
 fullscreenBtn.addEventListener('click', () => {
     if (!document.fullscreenElement) {
         document.documentElement.requestFullscreen().catch(() => {});
