@@ -5,9 +5,8 @@ const bgColor = document.getElementById('bgColor');
 const textColor = document.getElementById('textColor');
 const marqueeText = document.getElementById('marqueeText');
 
-const controls = document.getElementById('controls');
-const menuToggleBtn = document.getElementById('menuToggleBtn');
-const closeControlsBtn = document.getElementById('closeControlsBtn');
+const toggleBtn = document.getElementById('toggleBtn');
+const settingsCard = document.getElementById('settingsCard');
 const fullscreenBtn = document.getElementById('fullscreenBtn');
 
 // Live Text
@@ -31,23 +30,10 @@ textColor.addEventListener('input', (e) => {
     document.documentElement.style.setProperty('--text-color', e.target.value);
 });
 
-// Drawer Open/Close
-menuToggleBtn.addEventListener('click', () => {
-    controls.classList.toggle('open');
-});
-
-closeControlsBtn.addEventListener('click', () => {
-    controls.classList.remove('open');
-});
-
-// Keyboard shortcut (Press 'H' or 'Escape' to close)
-window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        controls.classList.remove('open');
-    }
-    if (e.target.tagName !== 'INPUT' && (e.key === 'h' || e.key === 'H')) {
-        controls.classList.toggle('open');
-    }
+// Settings Toggle
+toggleBtn.addEventListener('click', () => {
+    settingsCard.classList.toggle('hidden');
+    toggleBtn.textContent = settingsCard.classList.contains('hidden') ? '⚙️ Settings' : '✕ Close';
 });
 
 // Fullscreen
