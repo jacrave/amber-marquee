@@ -22,24 +22,27 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-family: system-ui, -apple-system, sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     transition: background-color 0.2s ease;
 }
 
-/* Marquee Text */
+/* Marquee Text Viewport */
 .marquee-viewport {
     width: 100vw;
     overflow: hidden;
     white-space: nowrap;
     display: flex;
     align-items: center;
+    pointer-events: none; /* Allows clicks to pass through */
 }
 
+/* Big Scalable Text */
 .scrolling-text {
     display: inline-block;
     color: var(--text-color);
     font-family: 'Arial Black', Impact, sans-serif;
-    font-size: clamp(3rem, 15vw, 12vh);
+    /* Responsive sizing: scales big on desktop without overflowing mobile */
+    font-size: clamp(3.5rem, 14vw, 24vh);
     font-weight: 900;
     letter-spacing: 2px;
     animation: scroll-left var(--scroll-duration) linear infinite;
@@ -53,38 +56,47 @@ body {
 /* Bottom Controls Container */
 #controlWrapper {
     position: fixed;
-    /* Respect iPhone bottom home indicator / safe area + 16px buffer */
-    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    /* Respect iPhone bottom bar while anchoring cleanly on desktop */
+    bottom: calc(20px + env(safe-area-inset-bottom, 0px));
     left: 50%;
     transform: translateX(-50%);
     width: 90%;
-    max-width: 380px;
+    max-width: 440px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     z-index: 100;
 }
 
 .pill-btn {
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(0, 0, 0, 0.78);
     color: #fff;
-    border: none;
-    padding: 8px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 8px 18px;
     border-radius: 20px;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.pill-btn:hover {
+    background: rgba(0, 0, 0, 0.9);
+    transform: scale(1.03);
 }
 
 .card {
     width: 100%;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(12px);
-    border-radius: 14px;
-    padding: 14px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.22);
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -99,15 +111,15 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
 }
 
 .field {
     display: flex;
     flex-direction: column;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 700;
-    color: #333;
+    color: #222;
     gap: 4px;
 }
 
@@ -117,37 +129,56 @@ body {
 
 input[type="text"] {
     width: 100%;
-    padding: 8px 12px;
-    font-size: 14px;
+    padding: 10px 14px;
+    font-size: 15px;
     font-weight: 600;
     border: 1px solid #ccc;
     border-radius: 8px;
+    background: #fff;
+}
+
+input[type="text"]:focus {
+    outline: 2px solid #000;
 }
 
 input[type="range"] {
-    width: 120px;
+    width: 130px;
+    cursor: pointer;
 }
 
 input[type="color"] {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
     background: none;
 }
 
 .action-btn {
     width: 100%;
-    padding: 8px;
+    padding: 10px;
     background: #111;
     color: #fff;
     border: none;
     border-radius: 8px;
-    font-weight: 600;
+    font-weight: 700;
+    font-size: 14px;
     cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.action-btn:hover {
+    background: #333;
 }
 
 .hidden {
     display: none !important;
+}
+
+/* Desktop-specific adjustments */
+@media (min-width: 900px) {
+    .scrolling-text {
+        font-size: 16vw; /* Full bold presence on ultrawide / desktop */
+    }
 }
